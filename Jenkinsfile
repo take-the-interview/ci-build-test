@@ -56,13 +56,5 @@ catch (exc) {
     echo "Caught: ${exc}"
 
     currentBuild.result = 'FAILURE'
-
-    node {
-        withEnv([
-            "BUILD_RESULT=${currentBuild.result}"
-        ]) {
-            sendNotification {}
-        }
-    }
 }
 

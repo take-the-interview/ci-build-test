@@ -31,16 +31,17 @@ try {
         }
 
         stage('Checkout source') {
-            checkout(
-                [
-                        $class: 'GitSCM',
-                        branches: [[name: '*/$BRANCH_NAME']],
-                        userRemoteConfigs: [[credentialsId: 'ttiops', url: "https://github.com/take-the-interview/${project_name}.git"]],
-                        extensions: [
-                                [$class: 'CloneOption', depth: 2, noTags: true, shallow: true]
-                        ]
-                ]
-            )
+            checkout scm
+            // checkout(
+            //     [
+            //             $class: 'GitSCM',
+            //             branches: [[name: '*/$BRANCH_NAME']],
+            //             userRemoteConfigs: [[credentialsId: 'ttiops', url: "https://github.com/take-the-interview/${project_name}.git"]],
+            //             extensions: [
+            //                     [$class: 'CloneOption', depth: 2, noTags: true, shallow: true]
+            //             ]
+            //     ]
+            // )
             gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
         }
 
